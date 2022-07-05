@@ -7,7 +7,6 @@ import (
 )
 
 func main() {
-
 	led := machine.D13
 	led.Configure(machine.PinConfig{Mode: machine.PinOutput})
 
@@ -16,14 +15,13 @@ func main() {
 
 	LedMorse("Hello world", led)
 
-	//Message finished flag
+	// Message finished flag
 	for i := 0; i < 5; i++ {
 		led.Set(true)
 		time.Sleep(time.Millisecond * 100)
 		led.Set(false)
 		time.Sleep(time.Millisecond * 100)
 	}
-
 }
 
 func Dot(pin machine.Pin) {
@@ -31,7 +29,6 @@ func Dot(pin machine.Pin) {
 	pinSleep(1)
 	pin.Set(false)
 	pinSleep(1)
-
 }
 
 func dashFinal(pin machine.Pin) {
@@ -178,7 +175,7 @@ func LedMorse(text string, pin machine.Pin) {
 			Dash(pin)
 			Dot(pin)
 			dotFinal(pin)
-		//TODO numbers dot, comma and signs
+		// TODO numbers dot, comma and signs
 		case alphabet[39]:
 			wordSpace(pin)
 		default:
@@ -193,5 +190,4 @@ func LedMorse(text string, pin machine.Pin) {
 			letterSpace(pin)
 		}
 	}
-
 }
