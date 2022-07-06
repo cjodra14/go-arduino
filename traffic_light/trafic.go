@@ -11,7 +11,7 @@ func main() {
 	pins[0] = machine.D11
 	pins[1] = machine.D12
 	pins[2] = machine.D13
-	for i, _ := range pins {
+	for i := range pins {
 		pins[i].Configure(outputConfig)
 	}
 	lightChange(pins[:])
