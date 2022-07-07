@@ -34,49 +34,51 @@ func main() {
 	lights[3].High()
 	lights[4].Low()
 
-	go lightChange(lights[:])
-
 	for {
 		if buttonInput.Get() {
 			stopTraffic = true
 		}
+		lightChange(lights[:])
 
 		time.Sleep(time.Second * 3)
 	}
 }
 
 func lightChange(pins []machine.Pin) {
-	for {
-		if stopTraffic {
-			pins[0].High()
-			pins[1].Low()
-			pins[2].Low()
 
-			pins[4].High()
-			pins[3].Low()
-			time.Sleep(time.Second * 20)
-
-			pins[4].Low()
-			pins[3].High()
-
-			stopTraffic = false
-		} else {
-			pins[3].High()
-			pins[4].Low()
-		}
-
+	if stopTraffic {
 		pins[0].High()
-		time.Sleep(time.Second * 20)
-		pins[1].High()
-		time.Sleep(time.Second * 3)
-		pins[0].Low()
 		pins[1].Low()
-		pins[2].High()
-		time.Sleep(time.Second * 40)
-
 		pins[2].Low()
-		pins[1].High()
-		time.Sleep(time.Second * 3)
-		pins[1].Low()
+
+		pins[4].High()
+		pins[3].Low()
+		time.Sleep(time.Second * 20)
+
+		pins[4].Low()
+		pins[3].High()
+
+		stopTraffic = false
+	} else {
+		pins[3].High()
+		pins[4].Low()
 	}
+
+	pins[0].Low()
+	pins[1].Low()
+	pins[2].High()
+	time.Sleep(time.Second * 40)
+
+	pins[2].Low()
+	pins[1].High()
+	time.Sleep(time.Second * 3)
+
+	pins[1].Low()
+	pins[3].Low()
+	pins[4].High()
+	pins[0].High()
+	time.Sleep(time.Second * 20)
+
+	pins[1].High()
+	time.Sleep(time.Second * 3)
 }
