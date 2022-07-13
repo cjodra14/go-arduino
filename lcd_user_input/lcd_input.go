@@ -13,7 +13,6 @@ var (
 )
 
 func main() {
-
 	i2c := machine.I2C0
 	i2c.Configure(machine.I2CConfig{
 		Frequency: machine.TWI_FREQ_400KHZ,
